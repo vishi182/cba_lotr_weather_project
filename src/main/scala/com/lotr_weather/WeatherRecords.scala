@@ -11,6 +11,7 @@ object WeatherRecords extends LotrSparkInit {
     * @param stn_id Weather Station ID
     * @param rec_date Record date
     * @param element
+    *                TAVG avg temperature
     *                TMAX max temperature
     *                TMIN min temperature
     *                PRCP Precipitation
@@ -48,7 +49,7 @@ object WeatherRecords extends LotrSparkInit {
     records
   }
 
-  /** Method joins LOTR mapping file with weather stations and weather records to generate dataframe of complete dataset
+  /** Method joins LOTR map file with weather stations and weather records to generate dataframe of complete dataset for a given date
     *
     * @param date processing date
     * @param lotr_places LOTR data file loaded into dataset of case class WeatherMap
@@ -58,8 +59,9 @@ object WeatherRecords extends LotrSparkInit {
     val map_date = Elements.getDateString(date)
     val stn = WeatherStations.loadStationsData(sc, STATION_FILE)
     val records = loadRecords(sc, RECORDS_FILE)
-    val weather_data = stn.join(lotr_places, "name").join(records, "stn_id")
-    val complete_data = weather_data.where(s"rec_date = $date")
+    val weather_data = stn.join(lotr_places, "name")
+    val lotr_to_rec = weather_data.join(records, "stn_id")
+    val complete_data = lotr_to_rec.filter(lotr_to_rec("rec_date") === date)
     complete_data
   }
 

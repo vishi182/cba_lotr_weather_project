@@ -32,7 +32,7 @@ object WeatherStations extends LotrSparkInit {
     import spark.implicits._
     val rows = sparkContext.
       textFile(RESOURCE_ROOT + fileName).
-      map(r => (r.substring(0,11).trim, r.substring(47,71).trim())).
+      map(r => (r.substring(0,11).trim, r.substring(41,71).trim())).
       map({ case (e1, e2) => Stations(e1.toString, e2.toString)}).
       toDF()
     rows

@@ -5,14 +5,14 @@ import org.apache.spark.sql.SparkSession
 import org.joda.time.format.{DateTimeFormat, DateTimeFormatter}
 
 trait LotrSparkInit {
-  private val master = "local[*]"
+  private val master = "local[1]"
   private val appName = "LOTR Weather"
 
   val spark: SparkSession = SparkSession.builder().appName(appName).master(master).getOrCreate()
   val sc: SparkContext = spark.sparkContext
   sc.setLogLevel("ERROR")
 
-  final val RESOURCE_ROOT = "src/resources/"
+  final val RESOURCE_ROOT = "src/main/resources/"
   final val DATE_FORMAT: DateTimeFormatter = DateTimeFormat.forPattern("yyyyMMdd")
   final val TA_DATE_FORMAT: DateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")
 
@@ -27,6 +27,9 @@ trait LotrSparkInit {
 
   //This mapping file has names of LOTR locations mapped to their real earth locations.
   final val LOTR_LOCATION_MAP = "lotr_map.txt"
+
+  //Monthly increase increase in temperature because of middle earth warming
+  final val MONTHLY_INC = 1.2
 
   //Scientific variables to calculate atmospheric pressure based on temperature and elevation
   final val TEMPERATURE_LAPSE = 0.0065
