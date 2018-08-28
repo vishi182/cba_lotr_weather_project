@@ -26,15 +26,22 @@ Input Files
 Key Features
 - Uses Apache Spark to read actual weather data file from NCDC to generate weather data for Lord of the Rings' Middle Earth Cities.
 - Envisages that Sauron's activities will result in global warming of the world. Temperature of the cities keep progressively increasing after T.A. 23 Sep 3018.
-    
-Run with random date picked by the program
-- sbt run
-- sbt "run-main com.lotr_weather.WeatherGenerator"
 
-Run by passing a desired date. Date format will be "YYYYMMDD"
-- sbt "run-main com.lotr_weather.WeatherGenerator" "30190323"  
+Usage Options
 
-Open the sbt project using your favorite IDE and run the WeatherGenerator.
+- Run with random date picked by the program
+  - sbt run
+  - sbt "run-main com.lotr_weather.WeatherGenerator"
+
+- Run by passing a desired date. Date format will be "YYYYMMDD"
+  - sbt "run-main com.lotr_weather.WeatherGenerator" "30190323"  
+
+- Open the sbt project using your desired IDE and run the WeatherGenerator.
+
+- In order to notice temperature increases, please pass date > 30180923. Before T.A. 23 Sep 3018. No impact was found on middle earth. That's before Frodo's journey started. During War of the Rings. Sauron's activity started impacting the atmosphere of middle earth.
+- Middle Earth warming will hit plateau after T.A. 29 Sep 3021. The impact will stay like this for all future years. 
+- No data post this date is available. Weather report will be based on last noticed effects. 
+
 
 
 TODO
